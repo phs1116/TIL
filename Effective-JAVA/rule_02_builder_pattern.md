@@ -1,10 +1,18 @@
-##2장 객체의 생성과 삭제
+## 2장 객체의 생성과 삭제
 
-###규칙 2. 생성자 인자가 많을 때는 Builder 패턴 적용 또한 고려하자.
+### 규칙 2. 생성자 인자가 많을 때는 Builder 패턴 적용 또한 고려하자.
+
+
+
+<br>
 
 
 
 static factory method와 constructor는 둘 다 선택적 인자가 많은 경우에 적응하기 힘들다는 공통적인 단점을 가지고 있다.
+
+
+
+<br>
 
 
 
@@ -58,6 +66,10 @@ public class NutritionFacts{
 
 
 
+<br>
+
+
+
 #### 2. 자바빈 패턴(JavaBeans Pattern) 
 
 두번째 방법으로는 자바빈 규약에 따르는 클래스를 생성 한 뒤, setter 메서드로 각 값들을 설정해 주는 방법이 있다.
@@ -86,6 +98,10 @@ public class NutritionFacts{
 자바빈 패턴은 점층적 생성자 패턴에 있던 문제는 없지만, 1회의 함수 호출로 객체 생성을 마칠 수 없으므로 객체 일관성이 깨질 수 있다.
 
 또한 자바빈 패턴은 immutable 클래스를 만들 수 없다는 단점이 있다.
+
+
+
+<br>
 
 
 
@@ -168,6 +184,10 @@ NutritionFacts cocaCola = new NutritionFacts.Builder(240, 8).calories(100).sodiu
 
 
 
+<br>
+
+
+
 ##### 빌더 패턴의 장점
 
 또한 빌더패턴을 적용하면서 얻을 수 있는 장점은 다음과 같다.
@@ -225,7 +245,12 @@ NutritionFacts cocaCola = new NutritionFacts.Builder(240, 8).calories(100).sodiu
 
    >  빌더 객체의 인자를 제한 할 경우, 보통 한정적 와일드카드 자료형을 통해 인자의 자료형을 제안한다.
    >
-   > ex ) Tree buildTree(Builder<? extends Node> nodeBuilder){ … }
+   >  ex ) Tree buildTree(Builder<? extends Node> nodeBuilder){ … }
+
+
+
+
+<br>
 
 
 
