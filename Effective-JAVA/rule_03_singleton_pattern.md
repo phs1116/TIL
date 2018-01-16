@@ -57,7 +57,7 @@
    }
    ```
 
-   `Elvis.getInstance`는 항상 같으 객체에 대한 참조를 반환한다. `Elvis.getInstance`를 이용한 경우 외에는 Elvis 객체를 생성 할 수 없다.
+   `Elvis.getInstance`는 항상 같은 객체에 대한 참조를 반환한다. `Elvis.getInstance`를 이용한 경우 외에는 Elvis 객체를 생성 할 수 없다.
 
    > 하지만 이 경우에도 앞선 공격은 가능하므로 이전 방식과 같이 방어로직을 작성해주어야 한다.
 
