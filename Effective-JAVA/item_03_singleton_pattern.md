@@ -33,7 +33,7 @@
    }
    ```
 
-   private 생성자는 `Elvis.INSTANCE`를 초기화 할 때 한번만 호출되고, public 혹은 protected 생성자가 없으므로 Elvis는 private 생성작 생선한 객체 하나만 존재하게 된다.
+   private 생성자는 `Elvis.INSTANCE`를 초기화 할 때 한번만 호출되고, public 혹은 protected 생성자가 없으므로 Elvis는 private 생성자가 생선한 객체 하나만 존재하게 된다.
 
    다만 위와 같은 경우에는 `Accessibleobject.setAccessible`메서드를 통해 리플렉션으로 private 생성자에 대한 접근 권한을 얻을 경우, 생성자를 여러번 호출 할 수 있다는 문제점이 있다. 
 
@@ -115,3 +115,15 @@ private Object readResolve(){
 
 
 >  TODO : 여러가지 싱글턴 패턴에 대해서도 따로 정리해보자.
+
+
+
+<br>
+
+
+
+#### 정리
+
+1. 싱글턴 객체 구현 방법에는 대표적으로 public static final으로 객체 초기화, 정적 팩토리 메서드를 이용한 방법, enum 등이 있다.
+2. 앞의 두개의 방법은 `Accessibleobject.setAccessible`를 통한 private 생성자 접근 공격을 막을 수 없다. 또한 직렬화에 의해 싱글턴이 깨질 위험이 있다.
+3. Effective JAVA에서는 enum을 이용한 싱글턴을 권장한다.
