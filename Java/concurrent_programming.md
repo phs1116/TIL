@@ -42,5 +42,79 @@ Executors 클래스에는 서로 다른 스케쥴링 정책을 가진 실행자 
 
 
 
+### Future
+
+Runnable은 테스크를 수행하지만 값을 반환하지 않는다. 결과를 계산하여 반환하는 테스크라면 Runnable아닌 Callable<V> 인터페이스를 사용해야한다.
+
+Callable<V>.call은 Runnable.run()이랑 다르게 V타입 값을 반환한다.
+
+
+
+```java
+public interface Callable<V> {
+  V call() throws Exception;
+}
+```
+
+#### ExecutorService
+
+Callable 인터페이스도 Runnable 인터페이스처럼 ExecutorService에 전달하여 사용한다.
+
+```java
+ExecutorService executor = Executors.newFixedThreadPool();
+Callable<V> task = ...;
+Future<V> result = executor.submit(task);
+```
+
+테스크를 ExecutorService에 제출하면 Future를 반환받는다. 
+
+<br>
+
+##### get
+
+```java
+V get() throw InterruptedException, ExecutionException
+V get(long timeout, TimeUnit unit) throw InterruptedException, ExecutionException
+```
+
+Future 클래스에서 get 메서드를 호출하면 Callable 에서 값을 반환할 때 까지 block한다. call 메서드 내에서 예외를 던지거나 타임아웃되면  get은 ExecutionException을 던진다. 
+
+<br>
+
+##### cancel
+
+```java
+boolean cancel(boolean mayInterruptIfRunning)
+```
+
+cancel 메서드는 테스크가 실행 중인 경우에 테스크를 취소한다.
+
+<br>
+
+##### invokeAll
+
+여러개의 서브테스크를 사용해야 할 경우 Callable 타입의 Collection을 ExecutorService.invokeAll에 인수를 전달한다.
+
+```java
+List<Callable<Object> tasks = new ArrayList({task1,task2,task3});
+List<Future<Object> results = executor.invokeAll(tasks);
+```
+
+위 호출은 모든 테스크가 종료되어 값이 리턴될 때 까지 블록한다. 타임아웃을 인자로 받아 타임아웃 되면 완료되지 않은 모든 테스크를 취소하는 `invokeAll(log timeout, TimeUnit unit)` 메서드도 있다.
+
+<br>
+
+##### ExecutorCompletionService
+
+ExecutionService.invokeAll처럼 모든 서브테스크들이 완료되기 전 까지 블록 될 필요가 없을 경우 사용한다.
+
+ExecutorCompletionService는 완료되는 순서 대로 Future를 반환한다.
+
+<br>
+
+##### invokeAny
+
+invokeAll과 비슷하지만 제출한 테스크중 하나라도 정상 종료 되면 즉시 Future을 반환하고 나머지 테스크를 취소한다. 
+
 
 
